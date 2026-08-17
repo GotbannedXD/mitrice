@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Space for Comfort</title>
+  <style>
+    :root {
+      /* Deepening the purples to make them look like a rich sanctuary */
+      --bg-dark: #0f051a; 
+      --bg-purple: #1a082e;
+      --text-main: #f3e8ff;
+      --text-glow: #e9d5ff; /* A lighter color for text shadows */
+      --purple-accent: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden; /* Prevent horizontal scroll from slides */
+    }
+
+    /* THE IMMERSIVE BACKGROUND */
+    .background-scroller {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Puts it behind everything */
+      display: flex;
+      overflow: hidden;
+    }
+
+    .background-scroller::after {
+      /* This is the magic blend layer */
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(15, 5, 26, 0.6) 0%, #0f051a 95%);
+      backdrop-filter: blur(10px) brightness(0.7) contrast(1.1); /* Very strong blur and slightly darker */
+      -webkit-backdrop-filter: blur(10px) brightness(0.7) contrast(1.1);
+    }
+
+    .bg-slide-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .bg-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out; /* Slow fade */
+    }
+
+    .bg-slide.active {
+      opacity: 0.6; /* Semi-transparent to blend with the purple background */
+    }
+
+    /* MAIN CONTENT LAYER */
+    .content-overlay {
+      position: relative;
+      z-index: 1; /* Rises above the background */
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      padding-top: 5vh;
+    }
+
+    /* THE GLOWING TITLE */
+    h1 {
+      color: #fff;
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      text-shadow: 
+        0 0 7px rgba(255, 255, 255, 0.4),
+        0 0 15px var(--purple-accent),
+        0 0 30px var(--purple-accent);
+    }
+
+    /* THE MESSAGE CARDS */
+    .card-container {
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(5px); /* Softening the background even more */
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      color: var(--text-glow);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(233, 213, 255, 0.3);
+    }
+
+    .card p {
+      line-height: 1.7;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* THE INTERACTIVE QUOTE/REMINDER SECTION */
+    .affirmation-box {
+      margin-top: 2rem;
+    }
+
+    .gen-btn {
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .gen-btn:hover {
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+      transform: translateY(-1px);
+    }
+
+    #comfort-note {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--text-glow);
+      font-style: italic;
+      min-height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. The Immersive, Blending Background Slideshow -->
+  <div class="background-scroller">
+    <div class="bg-slide-container">
+      <div class="bg-slide active" style="background-image: url('IMG-20260725-WA0006.jpg');"></div>
+      <div class="bg-slide" style="background-image: url('IMG-20260807-WA0026.jpg');"></div>
+      <div class="bg-slide" style="background-image: url('IMG-20260816-WA0047.jpg');"></div>
+      <div class="bg-slide" style="background-image: url('IMG-20260710-WA0107.jpg');"></div>
+      <div class="bg-slide" style="background-image: url('IMG-20260710-WA0119.jpg');"></div>
+    </div>
+  </div>
+
+  <!-- 2. The Content Layer (Rises above the background) -->
+  <div class="content-overlay">
+    <div class="container">
+      <h1>This Space is for You 💜</h1>
+
+      <div class="card-container">
+        <div class="card">
+          <h2>Relax, genuinely</h2>
+          <p>This page isn't just code; it's a dedicated quiet space. The colors are chosen to soothe, and the photos are a gentle loop of good moments, blended into the light.</p>
+          <p>Whatever stress is weighing on your mind today, set it down. You don't have to carry it all at once.</p>
+        </div>
+        
+        <div class="card">
+          <h2>Your peace matters</h2>
+          <p>It's okay to just exist, to slow down and breathe. Remember to give yourself credit for how strongly you navigate everything.</p>
+          <p>You can come back to this purple sanctuary whenever you need a quick reset.</p>
+        </div>
+      </div>
+
+      <!-- Interactive thought box -->
+      <div class="affirmation-box">
+        <button class="gen-btn" onclick="genReminder()">Tap for a gentle thought</button>
+        <p id="comfort-note"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // IMMEERSIVE SLIDESHOW LOGIC
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.bg-slide');
+
+    function advanceSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    // Set a slightly slower cycle (6 seconds) for a calmer effect
+    setInterval(advanceSlide, 6000); 
+
+    // GENTLE REMINDER GENERATOR
+    const notes = [
+      "✨ You are allowed to take up space and to rest.",
+      "✨ This moment is yours, let your shoulders drop.",
+      "✨ Take a breath; you don't have to carry everything alone.",
+      "✨ You bring light wherever you go, remember that.",
+      "✨ Hoping this purple calm finds you when you need it most."
+    ];
+
+    function genReminder() {
+      const randomIndex = Math.floor(Math.random() * notes.length);
+      document.getElementById('comfort-note').innerText = notes[randomIndex];
+    }
+  </script>
+</body>
+</html>
